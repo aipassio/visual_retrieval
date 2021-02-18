@@ -41,7 +41,7 @@ def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 
 # @csrf_protect
-def retrieval(request):
+def retrieval_insert(request):
     if request.method=="POST":
         data_dict = json.loads(request.body)
         new_id = data_dict['id']
@@ -59,11 +59,13 @@ def retrieval(request):
         new_obj.save()
         # import ipdb; ipdb.set_trace()
         return HttpResponse("Import image successfully!")
-    if request.method=="GET":
+
+def retrieval_get(request):
+    if request.method=="POST":
         try:
             # import ipdb; ipdb.set_trace()
             if request.body ==b'':
-                return HttpResponse("Hello index!")
+                return HttpResponse("You have inserted empty body!")
             data_dict = json.loads(request.body)
             list_object = Object.objects.values_list('object_id',  'features', 'object_img')
             distance_method = getattr(algorithms, ALGORITHMS['distances'][data_dict['distance']])

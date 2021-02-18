@@ -36,14 +36,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/retrieval",
+					"raw": "http://localhost:8000/retrieval_insert",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
-						"retrieval"
+						"retrieval_insert"
 					],
 					"query": [
 						{
@@ -59,11 +59,8 @@
 		},
 		{
 			"name": "New Request",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -75,14 +72,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/retrieval",
+					"raw": "http://localhost:8000/retrieval_get",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
-						"retrieval"
+						"retrieval_get"
 					]
 				}
 			},
