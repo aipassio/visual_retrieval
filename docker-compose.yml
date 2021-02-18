@@ -1,0 +1,43 @@
+version: '3.2'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  web:
+    build: .
+    restart: always
+    command: >
+      bash -c "rm -rf /code/retrieval/migrations &&
+      python /code/manage.py makemigrations &&
+      python /code/manage.py migrate &&
+      python /code/manage.py makemigrations retrieval &&
+      python /code/manage.py migrate retrieval &&
+      python manage.py runserver 0.0.0.0:8000
+      "
+    environment:
+      NAME: 'dbreid'
+      USER: 'postgres'
+      PASSWORD: '1234'
+      HOST: 'db'
+      PORT: '5432'
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+#  db manager utils
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - 8081:8081
