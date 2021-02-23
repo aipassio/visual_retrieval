@@ -8,7 +8,6 @@ const {Option} = Select;
 
 
 export default function Retrieval(props) {
-  console.log(props);
   // const [setResults] = props;
   const [form] = Form.useForm();
   const [initValues] = useState({
@@ -19,7 +18,6 @@ export default function Retrieval(props) {
   });
 
   const onFinish = (values) => {
-    console.log(values);
     const {file} = values.image;
     const reader = new FileReader();
     reader.readAsDataURL(file.originFileObj);
@@ -30,7 +28,6 @@ export default function Retrieval(props) {
         processData: false,
         data: values
       }).then(function (response) {
-        alert(response.info);
         let images = [];
         response.data.map(item => images.push({
           id: item[0],
@@ -38,7 +35,6 @@ export default function Retrieval(props) {
           image: item[2]
         }))
         props.setResults(images);
-        console.log(images);
       })
         .catch(function (error) {
           alert(`error: ${error}`);
@@ -57,7 +53,7 @@ export default function Retrieval(props) {
   const [previewImage, setPreviewImage] = useState(fallbackImage);
   return (
     <>
-      <b>Retrieval </b>
+      <h3><b>RETRIEVAL</b></h3>
       <Row>
         <Col>
           <Form form={form}

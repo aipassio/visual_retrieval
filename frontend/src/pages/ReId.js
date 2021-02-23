@@ -1,5 +1,5 @@
 import styles from './reid.css';
-import {Col, Divider, Image, Row} from "antd";
+import {Avatar, Col, Divider, Image, List, Row} from "antd";
 import {useState} from "react";
 import ImportId from "@/pages/ImportId";
 import Retrieval from "@/pages/Retrieval";
@@ -30,19 +30,37 @@ export default function () {
             </Row>
             <Divider/>
             <Row>
-              <Col span={24} style={{overflowX: "scroll", width: "100%"}}>
-                {results.map((result, index) => <><Image
-                  key={index}
-                  preview={false}
-                  style={{cursor: "pointer"}}
-                  onClick={(item) => {
-                    setCurrentImage("data:image/jpeg;base64," + result.image)
-                  }}
-                  width="64px"
-                  height="64px"
-                  src={"data:image/jpeg;base64," + result.image}
-                  fallback={fallbackImage}
-                />&nbsp;</>)}
+              <Col>
+                <div style={{overflowX: "auto", width: 650, height: 154}}>
+                  {results.map((result, index) =>
+                    <table style={{float: "left", width: 120}}>
+                      <tr>
+                        <td><b>ID:</b> {result.id} </td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><b>Distance:</b> {result.distance.toFixed(2)}</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td colSpan={2}>
+                          <Image
+                            key={index}
+                            preview={false}
+                            style={{cursor: "pointer"}}
+                            onClick={(item) => {
+                              setCurrentImage("data:image/jpeg;base64," + result.image)
+                            }}
+                            width="100px"
+                            height="100px"
+                            src={"data:image/jpeg;base64," + result.image}
+                            fallback={fallbackImage}
+                          />
+                        </td>
+                      </tr>
+                    </table>
+                  )}
+                </div>
               </Col>
             </Row>
           </Col>
