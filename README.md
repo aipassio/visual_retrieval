@@ -1,6 +1,9 @@
 # visual_retrieval
 ## Install:
-chmod +x ./install.sh
-source ./install.sh
-## Run web server:
-python manage.py runserver
+1. Install docker
+2. Stay on "visual_retrieval":
+'''
+docker-compose build
+docker-compose up
+'''
+3. On your web browser access url: localhost
